@@ -1,0 +1,24 @@
+---
+title: "course-modes"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE, 
+                      message = FALSE)
+```
+
+```{r load-packages}
+library(tidyverse)
+```
+
+```{r load-data}
+modes <- readr::read_csv('data/Course_Modes_Coding - Sheet1.csv')
+```
+
+```{r}
+modes
+```
+### Analysis
+
