@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = FALSE,
 ```{r load-packages}
 library(tidyverse)
 library(knitr)
+library(infer)
 ```
 
 ```{r load-data}
@@ -260,14 +261,6 @@ modes %>%
   count()
 ```
 
-```{r}
-modes %>%
-  group_by(`trinity/pratt`) %>%
-  summarise(total_online_fall = sum(`online (fall)`),
-            total_hybrid_fall = sum(`hybrid (fall)`),
-            total_person_fall = sum(`in-person (fall)`))%>% 
-  kable(digits = 3)
-```
 
 ```{r}
 modes %>%
@@ -288,20 +281,27 @@ modes %>%
   group_by(`trinity/pratt`) %>%
   summarise(total_online_spring = sum(`online (spring)`),
             total_hybrid_spring = sum(`hybrid (spring)`),
-            total_person_spring = sum(`in-person (spring)`)) %>% 
-  kable(digits = 3)
-```
-
-```{r}
-modes %>%
-  group_by(`trinity/pratt`) %>%
-  summarise(total_online_spring = sum(`online (spring)`),
-            total_hybrid_spring = sum(`hybrid (spring)`),
             total_person_spring = sum(`in-person (spring)`)) %>%
   mutate(prop_online_spring = `total_online_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`)),
          prop_hybrid_spring = `total_hybrid_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`)),
          prop_person_spring = `total_person_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`))) %>%
   select(`trinity/pratt`, prop_online_spring, prop_hybrid_spring, prop_person_spring)%>% 
+  kable(digits = 3)
+```
+
+#### Subjects affiliated with a department
+
+```{r}
+modes %>%
+  filter(type == "department") %>%
+  mutate(prop_online_fall = `online (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
+         prop_hybrid_fall = `hybrid (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
+         prop_person_fall = `in-person (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
+         prop_online_spring = `online (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`),
+         prop_hybrid_spring = `hybrid (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`),
+         prop_person_spring = `in-person (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`)) %>%
+  select(`SUBJECT`, prop_online_fall, prop_hybrid_fall, prop_person_fall, prop_online_spring, prop_hybrid_spring, prop_person_spring) %>%
+  arrange(desc(prop_online_fall))%>% 
   kable(digits = 3)
 ```
 
@@ -425,7 +425,7 @@ modes %>%
   filter(`ROTC` == "1") %>%
   mutate(prop_online_fall = `online (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
          prop_hybrid_fall = `hybrid (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
-         prop_person_fall = `hybrid (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
+         prop_person_fall = `in-person (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
          prop_online_spring = `online (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`),
          prop_hybrid_spring = `hybrid (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`),
          prop_person_spring = `in-person (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`)) %>%
@@ -482,7 +482,7 @@ modes %>%
   filter(`language` == "1") %>%
   mutate(prop_online_fall = `online (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
          prop_hybrid_fall = `hybrid (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
-         prop_person_fall = `hybrid (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
+         prop_person_fall = `in-person (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
          prop_online_spring = `online (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`),
          prop_hybrid_spring = `hybrid (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`),
          prop_person_spring = `in-person (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`)) %>%
