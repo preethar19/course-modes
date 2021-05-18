@@ -20,5 +20,50 @@ modes <- readr::read_csv('data/Course_Modes_Coding - Sheet1.csv')
 ```{r}
 modes
 ```
+
+### Data cleaning
+
+```{r, include = FALSE}
+newmodes <- modes %>% 
+  mutate(fall_online = `online (fall)`,
+         fall_hybrid = `hybrid (fall)`,
+         fall_person = `in-person (fall)`,
+         spring_online = `online (spring)`,
+         spring_hybrid = `hybrid (spring)`,
+         spring_person = `in-person (spring)`,
+         college = `trinity/pratt`,
+         mmcn = `major/minor/cert/none`,
+         degree = `BS/BA/both`)
+```
+
+```{r}
+newmodes <- newmodes %>% 
+  mutate(
+    per_fall_online = ((fall_online)/((fall_online) + 
+                                                 (fall_hybrid) + 
+                                                 (fall_person))),
+    per_fall_hybrid = ((fall_hybrid)/((fall_online) + 
+                                                 (fall_hybrid) + 
+                                                 (fall_person))),
+    per_fall_person = ((fall_person)/((fall_online) + 
+                                                 (fall_hybrid) + 
+                                                 (fall_person))),
+    per_spring_online = ((spring_online)/((spring_online) + 
+                                                 (spring_hybrid) + 
+                                                 (spring_person))),
+    per_spring_hybrid = ((spring_online)/((spring_online) + 
+                                                 (spring_hybrid) + 
+                                                 (spring_person))),
+    per_spring_person = ((spring_online)/((spring_online) + 
+                                                 (spring_hybrid) + 
+                                                 (spring_person)))
+    )
+
+```
+
+```{r}
+newmodes
+```
+
 ### Analysis
 
