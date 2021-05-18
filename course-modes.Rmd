@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = FALSE,
 
 ```{r load-packages}
 library(tidyverse)
+library(knitr)
 ```
 
 ```{r load-data}
@@ -251,3 +252,221 @@ newmodes %>%
   kable(digits = 3)
 ```
 
+#### Trinity/Pratt comparisons
+
+```{r}
+modes %>%
+  group_by(`trinity/pratt`) %>%
+  count()
+```
+
+```{r}
+modes %>%
+  group_by(`trinity/pratt`) %>%
+  summarise(total_online_fall = sum(`online (fall)`),
+            total_hybrid_fall = sum(`hybrid (fall)`),
+            total_person_fall = sum(`in-person (fall)`))
+```
+
+```{r}
+modes %>%
+  group_by(`trinity/pratt`) %>%
+  summarise(total_online_fall = sum(`online (fall)`),
+            total_hybrid_fall = sum(`hybrid (fall)`),
+            total_person_fall = sum(`in-person (fall)`)) %>%
+  mutate(prop_online_fall = `total_online_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`)),
+         prop_hybrid_fall = `total_hybrid_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`)),
+         prop_person_fall = `total_person_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`))) %>%
+  select(`trinity/pratt`, prop_online_fall, prop_hybrid_fall, prop_person_fall)
+```
+
+
+```{r}
+modes %>%
+  group_by(`trinity/pratt`) %>%
+  summarise(total_online_spring = sum(`online (spring)`),
+            total_hybrid_spring = sum(`hybrid (spring)`),
+            total_person_spring = sum(`in-person (spring)`)) 
+```
+
+```{r}
+modes %>%
+  group_by(`trinity/pratt`) %>%
+  summarise(total_online_spring = sum(`online (spring)`),
+            total_hybrid_spring = sum(`hybrid (spring)`),
+            total_person_spring = sum(`in-person (spring)`)) %>%
+  mutate(prop_online_spring = `total_online_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`)),
+         prop_hybrid_spring = `total_hybrid_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`)),
+         prop_person_spring = `total_person_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`))) %>%
+  select(`trinity/pratt`, prop_online_spring, prop_hybrid_spring, prop_person_spring)
+```
+
+#### Major/minor/cert/none comparisons
+
+```{r}
+modes %>%
+  group_by(`major/minor/cert/none`) %>%
+  count() %>%
+  arrange(desc(n))
+```
+
+```{r}
+modes %>%
+  group_by(`major/minor/cert/none`) %>%
+  summarise(total_online_fall = sum(`online (fall)`),
+            total_hybrid_fall = sum(`hybrid (fall)`),
+            total_person_fall = sum(`in-person (fall)`)) %>%
+  mutate(prop_online_fall = `total_online_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`)),
+         prop_hybrid_fall = `total_hybrid_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`)),
+         prop_person_fall = `total_person_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`))) %>%
+  select(`major/minor/cert/none`, prop_online_fall, prop_hybrid_fall, prop_person_fall)
+```
+
+```{r}
+modes %>%
+  group_by(`major/minor/cert/none`) %>%
+  summarise(total_online_spring = sum(`online (spring)`),
+            total_hybrid_spring = sum(`hybrid (spring)`),
+            total_person_spring = sum(`in-person (spring)`)) %>%
+  mutate(prop_online_spring = `total_online_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`)),
+         prop_hybrid_spring = `total_hybrid_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`)),
+         prop_person_spring = `total_person_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`))) %>%
+  select(`major/minor/cert/none`, prop_online_spring, prop_hybrid_spring, prop_person_spring)
+```
+
+#### BS/BA/both comparisons
+
+```{r}
+modes %>%
+  group_by(`BS/BA/both`) %>%
+  count() %>%
+  arrange(desc(n))
+```
+
+```{r}
+modes %>%
+  group_by(`BS/BA/both`) %>%
+  summarise(total_online_fall = sum(`online (fall)`),
+            total_hybrid_fall = sum(`hybrid (fall)`),
+            total_person_fall = sum(`in-person (fall)`)) %>%
+  mutate(prop_online_fall = `total_online_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`)),
+         prop_hybrid_fall = `total_hybrid_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`)),
+         prop_person_fall = `total_person_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`))) %>%
+  select(`BS/BA/both`, prop_online_fall, prop_hybrid_fall, prop_person_fall)
+```
+
+```{r}
+modes %>%
+  group_by(`BS/BA/both`) %>%
+  summarise(total_online_spring = sum(`online (spring)`),
+            total_hybrid_spring = sum(`hybrid (spring)`),
+            total_person_spring = sum(`in-person (spring)`)) %>%
+  mutate(prop_online_spring = `total_online_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`)),
+         prop_hybrid_spring = `total_hybrid_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`)),
+         prop_person_spring = `total_person_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`))) %>%
+  select(`BS/BA/both`, prop_online_spring, prop_hybrid_spring, prop_person_spring)
+```
+
+#### ROTC
+
+```{r}
+modes %>%
+  group_by(ROTC) %>%
+  count()
+```
+
+```{r}
+modes %>%
+  group_by(`ROTC`) %>%
+  summarise(total_online_fall = sum(`online (fall)`),
+            total_hybrid_fall = sum(`hybrid (fall)`),
+            total_person_fall = sum(`in-person (fall)`)) %>%
+  mutate(prop_online_fall = `total_online_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`)),
+         prop_hybrid_fall = `total_hybrid_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`)),
+         prop_person_fall = `total_person_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`))) %>%
+  select(`ROTC`, prop_online_fall, prop_hybrid_fall, prop_person_fall)
+```
+
+```{r}
+modes %>%
+  group_by(`ROTC`) %>%
+  summarise(total_online_spring = sum(`online (spring)`),
+            total_hybrid_spring = sum(`hybrid (spring)`),
+            total_person_spring = sum(`in-person (spring)`)) %>%
+  mutate(prop_online_spring = `total_online_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`)),
+         prop_hybrid_spring = `total_hybrid_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`)),
+         prop_person_spring = `total_person_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`))) %>%
+  select(`ROTC`, prop_online_spring, prop_hybrid_spring, prop_person_spring)
+```
+
+```{r}
+modes %>%
+  filter(ROTC == "1") %>%
+  select(`SUBJECT`, `online (fall)`, `hybrid (fall)`, `in-person (fall)`, `online (spring)`, `hybrid (spring)`, `in-person (spring)`) %>%
+  arrange(desc(`hybrid (fall)`))
+```
+
+```{r}
+modes %>%
+  filter(`ROTC` == "1") %>%
+  mutate(prop_online_fall = `online (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
+         prop_hybrid_fall = `hybrid (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
+         prop_person_fall = `hybrid (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
+         prop_online_spring = `online (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`),
+         prop_hybrid_spring = `hybrid (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`),
+         prop_person_spring = `in-person (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`)) %>%
+  select(`SUBJECT`, prop_online_fall, prop_hybrid_fall, prop_person_fall, prop_online_spring, prop_hybrid_spring, prop_person_spring) %>%
+  arrange(desc(prop_hybrid_fall))
+```
+
+#### Languages
+
+```{r}
+modes %>%
+  group_by(language) %>%
+  count()
+```
+
+```{r}
+modes %>%
+  group_by(`language`) %>%
+  summarise(total_online_fall = sum(`online (fall)`),
+            total_hybrid_fall = sum(`hybrid (fall)`),
+            total_person_fall = sum(`in-person (fall)`)) %>%
+  mutate(prop_online_fall = `total_online_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`)),
+         prop_hybrid_fall = `total_hybrid_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`)),
+         prop_person_fall = `total_person_fall`/ ((`total_online_fall`) + (`total_hybrid_fall`) + (`total_person_fall`))) %>%
+  select(`language`, prop_online_fall, prop_hybrid_fall, prop_person_fall)
+```
+
+```{r}
+modes %>%
+  group_by(`language`) %>%
+  summarise(total_online_spring = sum(`online (spring)`),
+            total_hybrid_spring = sum(`hybrid (spring)`),
+            total_person_spring = sum(`in-person (spring)`)) %>%
+  mutate(prop_online_spring = `total_online_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`)),
+         prop_hybrid_spring = `total_hybrid_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`)),
+         prop_person_spring = `total_person_spring`/ ((`total_online_spring`) + (`total_hybrid_spring`) + (`total_person_spring`))) %>%
+  select(`language`, prop_online_spring, prop_hybrid_spring, prop_person_spring)
+```
+
+```{r}
+modes %>%
+  filter(language == "1") %>%
+  select(`SUBJECT`, `online (fall)`, `hybrid (fall)`, `in-person (fall)`, `online (spring)`, `hybrid (spring)`, `in-person (spring)`) %>%
+  arrange(desc(`online (fall)`))
+```
+
+```{r}
+modes %>%
+  filter(`language` == "1") %>%
+  mutate(prop_online_fall = `online (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
+         prop_hybrid_fall = `hybrid (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
+         prop_person_fall = `hybrid (fall)`/ (`online (fall)` + `hybrid (fall)` + `in-person (fall)`),
+         prop_online_spring = `online (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`),
+         prop_hybrid_spring = `hybrid (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`),
+         prop_person_spring = `in-person (spring)`/ (`online (spring)` + `hybrid (spring)` + `in-person (spring)`)) %>%
+  select(`SUBJECT`, prop_online_fall, prop_hybrid_fall, prop_person_fall, prop_online_spring, prop_hybrid_spring, prop_person_spring) %>%
+  arrange(desc(prop_online_fall))
+```
