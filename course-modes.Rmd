@@ -146,11 +146,6 @@ newmodes %>%
   kable(digits = 3)
 ```
 
-- percent online, hybrid, in person for every subject
-
-- percent online, hybrid, in person for every subject affiliated w a dept
-
-- percent online, hybrid, in person for every subject that's ROTC
 
 - fall vs. spring for ROTC (no online, more in person in spring)
 ```{r}
@@ -201,9 +196,7 @@ newmodes %>%
   arrange(desc(per_spring_hybrid)) %>% 
   kable(digits = 3)
 ```
-(maybe do some sort of test to see if degree and percent hybrid are related)
 
-- percent online, hybrid, in person for every subject that's not a major
 
 - percent online, hybrid, in person BA/BSE/both
 ```{r}
@@ -215,7 +208,8 @@ newmodes %>%
   arrange(desc(mean_fall_hybrid)) %>% 
   kable(digits = 3)
 ```
-no appreciable difference between BA/both for fall. (test?)
+
+no appreciable difference between BA/both for fall.
 
 ```{r}
 newmodes %>%
@@ -226,7 +220,8 @@ newmodes %>%
   arrange(desc(mean_spr_hybrid)) %>% 
   kable(digits = 3)
 ```
-no appreciable difference between BA/both for spring. (test?)
+
+no appreciable difference between BA/both for spring. 
 
 - fall vs. spring for languages
 ```{r}
