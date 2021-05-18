@@ -67,3 +67,24 @@ newmodes
 
 ### Analysis
 
+- percent online, hybrid, in person for every subject
+
+- percent online, hybrid, in person for every subject affiliated w a dept
+
+- percent online, hybrid, in person for every subject that's ROTC
+
+- fall vs. spring for ROTC
+
+- percent online, hybrid, in person for every subject that's a major
+
+- percent online, hybrid, in person for every subject that's not a major
+
+- percent online, hybrid, in person for every subject that's a BA
+
+- percent online, hybrid, in person for every subject that's a BSE
+
+- percent online, hybrid, in person for every subject that's both (BA/BS)
+
+- fall vs. spring for languages
+
+
