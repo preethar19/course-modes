@@ -19,7 +19,7 @@ library(tidyverse)
 modes <- readr::read_csv('data/Course_Modes_Coding - Sheet1.csv')
 ```
 
-```{r}
+```{r, include = FALSE}
 modes
 ```
 
@@ -65,8 +65,8 @@ newmodes <- newmodes %>%
 
 ```
 
-```{r}
-newmodes
+```{r, include = FALSE}
+newmodes 
 ```
 
 ### Analysis
@@ -203,12 +203,51 @@ newmodes %>%
 
 - percent online, hybrid, in person for every subject that's not a major
 
-- percent online, hybrid, in person for every subject that's a BA
+- percent online, hybrid, in person BA/BSE/both
+```{r}
+newmodes %>%
+  group_by(degree) %>% 
+  summarize(mean_fall_online = mean(per_fall_online),
+            mean_fall_hybrid = mean(per_fall_hybrid),
+            mean_fall_person = mean(per_fall_person)) %>% 
+  arrange(desc(mean_fall_hybrid)) %>% 
+  kable(digits = 3)
+```
+no appreciable difference between BA/both for fall. (test?)
 
-- percent online, hybrid, in person for every subject that's a BSE
-
-- percent online, hybrid, in person for every subject that's both (BA/BS)
+```{r}
+newmodes %>%
+  group_by(degree) %>% 
+  summarize(mean_spr_online = mean(per_spring_online),
+            mean_spr_hybrid = mean(per_spring_hybrid),
+            mean_spr_person = mean(per_spring_person)) %>% 
+  arrange(desc(mean_spr_hybrid)) %>% 
+  kable(digits = 3)
+```
+no appreciable difference between BA/both for spring. (test?)
 
 - fall vs. spring for languages
+```{r}
+newmodes %>%
+  filter(language == 1) %>% 
+  select(SUBJECT, 
+         per_fall_online, 
+         per_fall_hybrid, 
+         per_fall_person, 
+         total_fall) %>% 
+  arrange(desc(per_fall_hybrid)) %>% 
+  kable(digits = 3)
+```
 
+```{r}
+newmodes %>%
+  filter(language == 1) %>% 
+  select(SUBJECT, 
+         per_spring_online, 
+         per_spring_hybrid, 
+         per_spring_person, 
+         total_spring) %>% 
+  arrange(desc(per_spring_hybrid)) %>% 
+  kable(digits = 3)
+```
 
